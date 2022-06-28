@@ -1,1 +1,18 @@
-<p>graph1 works!</p>
+<div class="row">
+    <div class="col-6">
+        <app-dougnuth title="Sales"></app-dougnuth>
+    </div>
+    <div class="col-6">
+        <app-dougnuth [labels]="labels1"
+                      [data]="data1"
+                      title="Purchases"></app-dougnuth>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        <app-dougnuth></app-dougnuth>
+    </div>
+    <div class="col-6">
+        <app-dougnuth></app-dougnuth>
+    </div>
+</div>
