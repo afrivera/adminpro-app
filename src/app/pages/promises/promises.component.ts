@@ -26,7 +26,7 @@ export class PromisesComponent implements OnInit {
     // console.log('end init')
 
     this.getUsers()
-      .then( console.log)
+      // .then( console.log)
 
   }
 
