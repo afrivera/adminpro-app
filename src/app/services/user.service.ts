@@ -22,6 +22,11 @@ export class UserService {
   }
 
   login( formData: LoginForm ){
+    if( formData.remember){
+      localStorage.setItem('email', formData.email);
+    } else {
+      localStorage.removeItem('email');
+    }
     return this.http.post( `${this._baseUrl}/auth/login`, formData )
               .pipe(
                 map( (resp: any) => {

@@ -43,8 +43,8 @@ export class RegisterComponent {
           console.log(resp)
         },
         error: err => {
-          console.log(err)
-          Swal.fire('Error', err.error, 'error')
+          console.log(err.status)
+          Swal.fire('Error', 'there was an error', 'error')
         }
       });
   }

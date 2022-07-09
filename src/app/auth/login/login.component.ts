@@ -11,6 +11,7 @@ import { UserService } from '../../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
+  public email!: string;
   public formSubmit = false;
 
   public loginForm = this.fb.group({
@@ -26,9 +27,14 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.email = localStorage.getItem('email') || '';
+    if( this.email.length > 1){
+      this.loginForm.get('remember')?.setValue(true);
+    }
   }
 
   login(){
+
     this.userService.login( this.loginForm.value )
       .subscribe( resp => this.router.navigateByUrl('/dashboard'))
     // console.log(this.loginForm.value)
