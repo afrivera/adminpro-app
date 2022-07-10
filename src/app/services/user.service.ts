@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { environment } from 'src/environments/environment';
 import { LoginForm } from '../interfaces/login-form.interface';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,18 @@ export class UserService {
     }
     return this.http.post( `${this._baseUrl}/auth/login`, formData )
               .pipe(
-                map( (resp: any) => {
+                tap( (resp: any) => {
+                  localStorage.setItem('x-token', resp.body.token)
+                  return true
+                })
+              )     
+  }
+
+  loginGoogle( token: string ){
+    
+    return this.http.post( `${this._baseUrl}/auth/login/google`, {token} )
+              .pipe(
+                tap( (resp: any) => {
                   localStorage.setItem('x-token', resp.body.token)
                   return true
                 })
