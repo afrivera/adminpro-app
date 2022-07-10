@@ -9,7 +9,15 @@ import { UserService } from '../../services/user.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor( private userService: UserService) { }
+  public imgUrl: string = '';
+  public name: string = '';
+  public email: string = '';
+
+  constructor( private userService: UserService) { 
+    this.imgUrl = userService.user.imageUrl;
+    this.name = userService.user.name;
+    this.email = userService.user.email;
+  }
 
   ngOnInit(): void {
   }
