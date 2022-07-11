@@ -4,22 +4,34 @@
             <div class="card-body">
                 <h4 class="card-title">My Profile</h4>
                 <h6 class="card-subtitle">Account settings</h6>
-                <form class="form p-t-20">
+                <form class="form p-t-20" 
+                      [formGroup]="profileForm" 
+                      (submit)="updateProfile()">
                     <div class="form-group">
                         <label for="exampleInputuname">User Name</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
-                            <input type="text" class="form-control" id="exampleInputuname" placeholder="Username">
+                            <input type="text" 
+                                   class="form-control" 
+                                   formControlName="name"
+                                   id="exampleInputuname" 
+                                   placeholder="Username">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                            <input type="email" 
+                                   class="form-control" 
+                                   formControlName="email"
+                                   id="exampleInputEmail1" 
+                                   placeholder="Enter email">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+                    <button type="submit" 
+                            class="btn btn-success btn-block waves-effect waves-light m-r-10"
+                            [disabled]="profileForm.invalid">
                         <i class="fa fa-save"></i> Submit</button>
                 </form>
             </div>
