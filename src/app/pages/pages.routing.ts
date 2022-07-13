@@ -10,6 +10,7 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { UsersComponent } from './manteinances/users/users.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,10 @@ const routes: Routes = [
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises'} },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'RXJS'} },
       { path: 'profile', component: ProfileComponent, data: { title: 'Profile'} },
-      
+
+      // manteinances
+      { path: 'users', component: UsersComponent, data: { title: 'Application Users'} },
+
     ]
   },
 ];
