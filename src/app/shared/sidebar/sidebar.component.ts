@@ -20,8 +20,8 @@ export class SidebarComponent implements OnInit {
     private userService: UserService
   ) { 
     this.menuItems = this.sidebarService.menu;
-    this.imgUrl = userService.user.imageUrl;
-    this.user = userService.user;
+    this.imgUrl = this.userService.user.imageUrl;
+    this.user = this.userService.user;
   }
 
   ngOnInit(): void {
