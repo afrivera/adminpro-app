@@ -2,9 +2,12 @@ import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
+
 import { environment } from 'src/environments/environment';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
+import { LoadUsers } from '../interfaces/load-users.interface';
+
 import { User } from '../models/user.model';
 
 declare const gapi:any;
@@ -31,6 +34,14 @@ export class UserService {
 
   get uid(){
     return this.user.uid || '';
+  }
+
+  get headers(){
+    return {
+      headers: {
+      'x-token': this.token
+      }
+    }
   }
 
   googleInit(){
@@ -118,5 +129,21 @@ export class UserService {
         this.router.navigateByUrl('/login')   
       })
     })
+  }
+
+  getUsers(since:number = 0){
+    return this.http.get<LoadUsers>( `${this._baseUrl}/users?since=${ since }`, this.headers)
+            .pipe(
+              map( resp => {
+
+                const users = resp.body.users.map( user => new User( user.name, user.email, '', user.image, user.google, user.role, user.uid));
+                return {
+                  body: {
+                    total: resp.body.total,
+                    users
+                  }
+                }
+              } )
+            )
   }
 }
