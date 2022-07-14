@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, delay, map, Observable, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { environment } from 'src/environments/environment';
@@ -134,6 +134,7 @@ export class UserService {
   getUsers(since:number = 0){
     return this.http.get<LoadUsers>( `${this._baseUrl}/users?since=${ since }`, this.headers)
             .pipe(
+              delay( 600 ),
               map( resp => {
 
                 const users = resp.body.users.map( user => new User( user.name, user.email, '', user.image, user.google, user.role, user.uid));

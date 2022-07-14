@@ -9,7 +9,8 @@
         </div>
     </div>
 </div>
-<div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast"
+     *ngIf="loading">
     <div class="col-12">
         <div class="alert alert-info text-center">
             <h4 class="alert-heanding">Loading</h4>
@@ -19,7 +20,8 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row animated fadeIn fast"
+     *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -50,7 +52,7 @@
                                     <span *ngIf="!user.google" class="label label-info">Email</span>
                                 </td>
                                 
-                                <td class="text-nowrap">
+                                <td class="text-nowrap text-center">
                                     <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                     <a href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
                                 </td>
