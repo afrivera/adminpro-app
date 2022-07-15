@@ -4,6 +4,8 @@
             <div class="card-body">
                 <input type="text"
                        class="form-control"
+                       #txtSearch
+                       (keyup)="search( txtSearch.value  )"
                        placeholder="search users...">
             </div>
         </div>
@@ -53,15 +55,20 @@
                                 </td>
                                 
                                 <td class="text-nowrap text-center">
-                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
+                                    <a (click)="delUser(user)" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a data-toggle="tooltip"  
+                                       classs="cursor"
+                                       (click)="delUser(user)"
+                                       data-original-title="Delete"> <i class="fa fa-close text-danger cursor"></i> </a>
                                 </td>
                             </tr>
                            
                         </tbody>
                     </table>
-                    <button (click)="changePage( -5 )" class="btn btn-secondary mr-2">Previous</button>
-                    <button (click)="changePage( 5 )" class="btn btn-secondary">Next</button>
+                    <div *ngIf="txtSearch.value.length === 0">
+                        <button (click)="changePage( -5 )" class="btn btn-secondary mr-2">Previous</button>
+                        <button (click)="changePage( 5 )" class="btn btn-secondary">Next</button>
+                    </div>
                 </div>
             </div>
         </div>

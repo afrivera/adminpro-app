@@ -9,6 +9,7 @@ import { RegisterForm } from '../interfaces/register-form.interface';
 import { LoadUsers } from '../interfaces/load-users.interface';
 
 import { User } from '../models/user.model';
+import Swal from 'sweetalert2';
 
 declare const gapi:any;
 @Injectable({
@@ -147,4 +148,9 @@ export class UserService {
               } )
             )
   }
+
+  destroyUser( user: User ){
+    return this.http.delete( `${ this._baseUrl }/users/${ user.uid }`, this.headers );
+  }
+
 }

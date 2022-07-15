@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user.model';
 import { UserService } from '../../../services/user.service';
+import { SearchsService } from '../../../services/searchs.service';
+
+import { User } from 'src/app/models/user.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-users',
@@ -12,11 +15,13 @@ export class UsersComponent implements OnInit {
 
   public totalUsers = 0;
   public users : User[] = [];
+  public usersTemp : User[] = [];
   public since: number = 0;
   public loading: boolean = true
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private searchService: SearchsService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +34,7 @@ export class UsersComponent implements OnInit {
       .subscribe(({body}) => {
         this.totalUsers = body.total;
         this.users = body.users; 
+        this.usersTemp = body.users; 
         this.loading = false
       })
   }
@@ -42,6 +48,36 @@ export class UsersComponent implements OnInit {
     }
 
     this.loadUsers();
+  }
+
+  search( term: string ): any{
+    if( term.length ===0){
+      return this.users = [...this.usersTemp];
+    }
+    this.searchService.search( 'users', term )
+      .subscribe ( resp => this.users = resp)
+  }
+
+  delUser( user: User){
+    Swal.fire({
+      title: '¿Are you Sure',
+      text: `you delete to ${ user.name }`,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, do it'
+    }).then( (result) => {
+      if( result.value ){
+        this.userService.destroyUser( user )
+          .subscribe( resp => {
+            Swal.fire(
+              'Deleted!',
+              `${ User.name } has been deleted`,
+              'success'
+            )
+            this.loadUsers();
+          })
+      }
+    })
   }
 
 }
