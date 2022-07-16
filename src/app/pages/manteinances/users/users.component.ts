@@ -58,7 +58,12 @@ export class UsersComponent implements OnInit {
       .subscribe ( resp => this.users = resp)
   }
 
-  delUser( user: User){
+  delUser( user: User):any{
+
+    if( user.uid === this.userService.uid){
+      return Swal.fire('Error', 'You Can\'t delete yourself', 'error')
+    }
+
     Swal.fire({
       title: '¿Are you Sure',
       text: `you delete to ${ user.name }`,
