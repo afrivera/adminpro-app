@@ -26,3 +26,17 @@
     border-radius: 100%;
     width: 30px;
 }
+
+.hidden-modal {
+    display: none;
+}
+
+.background-modal-image{
+    background-color: rgb(0, 0, 0, 0.4);
+    left: 0px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 9999;
+}
