@@ -90,11 +90,7 @@ export class UserService {
   }
 
   updateProfile( data: { email: string, name: string }){
-    return this.http.put( `${ this._baseUrl }/users/${this.uid}`, data, {
-      headers: {
-      'x-token': this.token
-      }
-    })      
+    return this.http.put( `${ this._baseUrl }/users/${this.uid}`, data, this.headers )      
   }
 
   login( formData: LoginForm ){
@@ -153,4 +149,7 @@ export class UserService {
     return this.http.delete( `${ this._baseUrl }/users/${ user.uid }`, this.headers );
   }
 
+  saveProfile( user: User ){
+    return this.http.put( `${ this._baseUrl }/users/${user.uid}`, user, this.headers )      
+  }
 }

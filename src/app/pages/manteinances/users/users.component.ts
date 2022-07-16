@@ -85,4 +85,11 @@ export class UsersComponent implements OnInit {
     })
   }
 
+  changeRole( user: User ){
+    this.userService.saveProfile( user )
+      .subscribe(res => {
+        console.log(res)
+      } )
+  }
+
 }

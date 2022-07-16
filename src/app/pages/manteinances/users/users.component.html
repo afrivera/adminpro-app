@@ -49,7 +49,9 @@
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>
-                                    <select class="form-control" name="" id="">
+                                    <select class="form-control"
+                                            [(ngModel)]="user.role"
+                                            (change)="changeRole( user )">
                                         <option value="ADMIN_ROLE">Admin</option>
                                         <option value="USER_ROLE">User</option>
                                     </select>
