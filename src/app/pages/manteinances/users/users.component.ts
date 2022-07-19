@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
 import { UserService } from '../../../services/user.service';
 import { SearchsService } from '../../../services/searchs.service';
-import { ModalImageService } from '../../../services/modal-image.service';
+import { ModalImageService, Types } from '../../../services/modal-image.service';
 
 import { User } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -13,11 +14,13 @@ import { User } from 'src/app/models/user.model';
   styles: [
   ]
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   public totalUsers = 0;
   public users : User[] = [];
   public usersTemp : User[] = [];
+
+  public imgSubs!: Subscription
   public since: number = 0;
   public loading: boolean = true
 
@@ -26,9 +29,14 @@ export class UsersComponent implements OnInit {
     private searchService: SearchsService,
     private modalImageService: ModalImageService
   ) { }
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.loadUsers();
+
+    this.imgSubs =  this.modalImageService.newImage.subscribe( img => this.loadUsers());
   }
 
   loadUsers(){
@@ -96,7 +104,7 @@ export class UsersComponent implements OnInit {
   }
 
   showModalImage( user: User ){
-    this.modalImageService.openModal();
+    this.modalImageService.openModal( Types.users, user.uid! , user.image );
   }
 
 }
