@@ -15,6 +15,8 @@ import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './manteinances/users/users.component';
+import { HospitalsComponent } from './manteinances/hospitals/hospitals.component';
+import { DoctorsComponent } from './manteinances/doctors/doctors.component';
 
 
 
@@ -29,6 +31,8 @@ import { UsersComponent } from './manteinances/users/users.component';
     RxjsComponent,
     ProfileComponent,
     UsersComponent,
+    HospitalsComponent,
+    DoctorsComponent,
   ],
   imports: [
     CommonModule,
