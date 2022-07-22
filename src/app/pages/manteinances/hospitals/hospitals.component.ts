@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HospitalService } from '../../../services/hospital.service';
+import { Hospital } from '../../../models/hospital.model';
 
 @Component({
   selector: 'app-hospitals',
@@ -8,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HospitalsComponent implements OnInit {
 
-  constructor() { }
+  public hospitals : Hospital[] = [];
+  public loading: boolean = true;
+
+  constructor(
+    private hospitalService: HospitalService
+  ) { }
 
   ngOnInit(): void {
+    this.loadHospitals();    
+  }
+
+  loadHospitals(){
+    this.loading = true;
+
+    this.hospitalService.loadHospitals()
+      .subscribe( hospitals => {
+        this.loading = false;
+        this.hospitals = hospitals;
+      })
   }
 
 }
