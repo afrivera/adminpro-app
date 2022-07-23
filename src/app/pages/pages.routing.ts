@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './manteinances/users/users.component';
 import { HospitalsComponent } from './manteinances/hospitals/hospitals.component';
 import { DoctorsComponent } from './manteinances/doctors/doctors.component';
+import { DoctorComponent } from './manteinances/doctors/doctor.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent, data: { title: 'Application Users'} },
       { path: 'hospitals', component: HospitalsComponent, data: { title: 'Application Hospitals'} },
       { path: 'doctors', component: DoctorsComponent, data: { title: 'Application Doctors'} },
+      { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Application Doctor'} },
 
     ]
   },
