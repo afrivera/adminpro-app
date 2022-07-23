@@ -34,4 +34,9 @@ export class DoctorService {
         map((res: any) => res.body)
       )
   }
+
+  destroyDoctor( doctor: Doctor ){
+    const url = `${ base_url}/doctors/${ doctor._id}`;
+    return this.http.delete(url, this.headers);
+  }
 }

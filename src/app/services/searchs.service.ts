@@ -42,6 +42,7 @@ export class SearchsService {
                   case 'users':
                     return this.transformUsers( resp.body )
                 
+                  case 'doctors':
                   case 'hospitals':
                     return resp.body;
                 
