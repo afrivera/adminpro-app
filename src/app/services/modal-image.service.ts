@@ -14,7 +14,7 @@ export class ModalImageService {
   private _hiddenModal: boolean = true;
   private _baseUrl : string = environment.baseUrl;
 
-  public type!: Types;
+  public type!: 'users' | 'hospitals' | 'doctors';
   public id!: string;
   public img!: string;
 
@@ -26,7 +26,7 @@ export class ModalImageService {
   constructor() { }
 
   openModal( 
-    type: Types, 
+    type: 'users' | 'hospitals' | 'doctors', 
     id: string,
     img: string = 'no-image'){
       this._hiddenModal = false;
