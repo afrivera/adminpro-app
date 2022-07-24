@@ -35,6 +35,24 @@ export class DoctorService {
       )
   }
 
+  getDoctorById( id: string ):Observable<Doctor>{
+    const url = `${ base_url }/doctors/${ id }`;
+    return this.http.get( url, this.headers)
+      .pipe(
+        map( (res: any) => res.body)
+      )
+  }
+
+  createDoctor( doctor: Doctor){
+    const url = `${ base_url }/doctors`;
+    return this.http.post( url, doctor, this.headers);
+  }
+
+  updateDoctor( doctor: Doctor ){
+    const url = `${ base_url }/doctors/${ doctor._id }`;
+    return this.http.put( url, doctor, this.headers );
+  }
+
   destroyDoctor( doctor: Doctor ){
     const url = `${ base_url}/doctors/${ doctor._id}`;
     return this.http.delete(url, this.headers);
