@@ -37,6 +37,5 @@ export class SidebarService implements OnInit{
 
   loadMenu(){
     this.menu = JSON.parse( localStorage.getItem('menu')!) || [];
-    console.log(this.menu)
   }
 }

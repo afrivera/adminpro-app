@@ -1,6 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
+import { AdminGuard } from '../guards/admin.guard';
+
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -35,7 +37,9 @@ const routes: Routes = [
       { path: 'doctors', component: DoctorsComponent, data: { title: 'Application Doctors'} },
       { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Application Doctor'} },
       { path: 'hospitals', component: HospitalsComponent, data: { title: 'Application Hospitals'} },
-      { path: 'users', component: UsersComponent, data: { title: 'Application Users'} },
+
+      // route admin
+      { path: 'users', canActivate: [AdminGuard], component: UsersComponent, data: { title: 'Application Users'} },
 
     ]
   },
