@@ -58,6 +58,11 @@ export class UserService {
     })
   }
 
+  saveLS( token: string, menu:any ){
+    localStorage.setItem('x-token', token);
+    localStorage.setItem('menu', JSON.stringify(menu));
+  }
+
   ValidToken(): Observable<boolean>{
     return this.http.get(`${this._baseUrl}/auth/renew`, {
       headers: {
@@ -68,7 +73,7 @@ export class UserService {
         map( (resp: any) => {
           const { name, email, image, google, role, uid } = resp.body.user;
           this.user = new User( name, email, '', image, google, role, uid);
-          localStorage.setItem('x-token', resp.body.token);
+          this.saveLS( resp.body.token, resp.body.menu);
           return true;
         }),
         catchError( err => of( false ))
@@ -80,7 +85,7 @@ export class UserService {
               .pipe(
                 tap(
                   (resp: any) => {
-                    localStorage.setItem('x-token', resp.body.token)
+                    this.saveLS( resp.body.token, resp.body.menu);
                   }
                 ),
                 map( res => true),
@@ -102,7 +107,7 @@ export class UserService {
     return this.http.post( `${this._baseUrl}/auth/login`, formData )
               .pipe(
                 tap( (resp: any) => {
-                  localStorage.setItem('x-token', resp.body.token)
+                  this.saveLS( resp.body.token, resp.body.menu);
                   return true
                 })
               )     
@@ -113,7 +118,7 @@ export class UserService {
     return this.http.post( `${this._baseUrl}/auth/login/google`, {token} )
               .pipe(
                 tap( (resp: any) => {
-                  localStorage.setItem('x-token', resp.body.token)
+                  this.saveLS( resp.body.token, resp.body.menu);
                   return true
                 })
               )     
@@ -121,6 +126,7 @@ export class UserService {
 
   logout(){
     localStorage.removeItem('x-token');
+    localStorage.removeItem('menu');
     this.auth2.signOut().then(()=> {
       this.ngZone.run(()=> {
         this.router.navigateByUrl('/login')   
