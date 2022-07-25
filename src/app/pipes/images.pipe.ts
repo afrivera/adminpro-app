@@ -10,7 +10,7 @@ const base_url = environment.baseUrl;
 })
 export class ImagesPipe implements PipeTransform {
 
-  transform(image: string, type: 'hospitals'| 'doctors'): string {
+  transform(image: string, type: 'users' | 'hospitals'| 'doctors'): string {
     if( !image ){
       return `${ base_url }/uploads/${ type }/no-image`;
   }else if( image?.includes('https')){

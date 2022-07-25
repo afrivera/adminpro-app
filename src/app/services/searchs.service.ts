@@ -34,6 +34,11 @@ export class SearchsService {
     )
   }
 
+  globalSearch( term: string ){
+    const url = `${ this._baseUrl }/all/search/${ term }`
+    return this.http.get( url, this.headers );
+  }
+
   search( type: 'users' | 'doctors' | 'hospitals', term: string){
     return this.http.get<any []>( `${this._baseUrl}/all/collection/${ type }/${ term }`, this.headers)
             .pipe(

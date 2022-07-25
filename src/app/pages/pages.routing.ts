@@ -14,6 +14,7 @@ import { UsersComponent } from './manteinances/users/users.component';
 import { HospitalsComponent } from './manteinances/hospitals/hospitals.component';
 import { DoctorsComponent } from './manteinances/doctors/doctors.component';
 import { DoctorComponent } from './manteinances/doctors/doctor.component';
+import { SearchsComponent } from './searchs/searchs.component';
 
 
 const routes: Routes = [
@@ -22,18 +23,19 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: '', component: DashboardComponent, data: { title: 'Dashboard'} },
-      { path: 'progress', component: ProgressComponent, data: { title: 'ProgressBar'} },
-      { path: 'graph1', component: Graph1Component, data: { title: 'Graph #1'} },
       { path: 'account-settings', component: AccountSettingsComponent, data: { title: 'Account Settings'} },
+      { path: 'graph1', component: Graph1Component, data: { title: 'Graph #1'} },
+      { path: 'profile', component: ProfileComponent, data: { title: 'Profile'} },
+      { path: 'progress', component: ProgressComponent, data: { title: 'ProgressBar'} },
       { path: 'promises', component: PromisesComponent, data: { title: 'Promises'} },
       { path: 'rxjs', component: RxjsComponent, data: { title: 'RXJS'} },
-      { path: 'profile', component: ProfileComponent, data: { title: 'Profile'} },
+      { path: 'search/:term', component: SearchsComponent, data: { title: 'Searchs'} },
 
       // manteinances
-      { path: 'users', component: UsersComponent, data: { title: 'Application Users'} },
-      { path: 'hospitals', component: HospitalsComponent, data: { title: 'Application Hospitals'} },
       { path: 'doctors', component: DoctorsComponent, data: { title: 'Application Doctors'} },
       { path: 'doctor/:id', component: DoctorComponent, data: { title: 'Application Doctor'} },
+      { path: 'hospitals', component: HospitalsComponent, data: { title: 'Application Hospitals'} },
+      { path: 'users', component: UsersComponent, data: { title: 'Application Users'} },
 
     ]
   },

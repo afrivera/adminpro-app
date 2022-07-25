@@ -19,6 +19,7 @@ import { UsersComponent } from './manteinances/users/users.component';
 import { HospitalsComponent } from './manteinances/hospitals/hospitals.component';
 import { DoctorsComponent } from './manteinances/doctors/doctors.component';
 import { DoctorComponent } from './manteinances/doctors/doctor.component';
+import { SearchsComponent } from './searchs/searchs.component';
 
 
 
@@ -36,6 +37,7 @@ import { DoctorComponent } from './manteinances/doctors/doctor.component';
     HospitalsComponent,
     DoctorsComponent,
     DoctorComponent,
+    SearchsComponent,
   ],
   imports: [
     CommonModule,
