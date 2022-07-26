@@ -26,19 +26,10 @@ export class HospitalService {
   get token( ){
     return localStorage.getItem('x-token') || '';
   }
-  
-  get headers(){
-    return {
-      headers: {
-        'x-token': this.token
-      }
-    }
-  }
-
 
   loadHospitals():Observable<Hospital[]>{
     const url = `${ base_url}/hospitals`
-    return this.http.get( url, this.headers )
+    return this.http.get( url )
             .pipe(
               map( (res: any) => res .body)
             )        
@@ -46,17 +37,17 @@ export class HospitalService {
 
   createHospital( name: string ){
     const url = `${ base_url}/hospitals`
-    return this.http.post( url, { name }, this.headers);
+    return this.http.post( url, { name });
   }
 
   updateHospital( _id: string, name: string ){
     const url = `${ base_url}/hospitals/${ _id }`
-    return this.http.put( url, { name }, this.headers);
+    return this.http.put( url, { name });
   }
 
   destroyHospital( _id: string ){
     const url = `${ base_url}/hospitals/${ _id }`
-    return this.http.delete( url, this.headers);
+    return this.http.delete( url);
   }
 
 }

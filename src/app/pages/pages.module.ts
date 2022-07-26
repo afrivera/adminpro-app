@@ -20,6 +20,8 @@ import { HospitalsComponent } from './manteinances/hospitals/hospitals.component
 import { DoctorsComponent } from './manteinances/doctors/doctors.component';
 import { DoctorComponent } from './manteinances/doctors/doctor.component';
 import { SearchsComponent } from './searchs/searchs.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterceptorService } from '../interceptors/interceptor.service';
 
 
 
@@ -54,6 +56,13 @@ import { SearchsComponent } from './searchs/searchs.component';
     Graph1Component,
     PagesComponent,
     AccountSettingsComponent,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true
+    }
   ]
 })
 export class PagesModule { }

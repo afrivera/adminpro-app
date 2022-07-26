@@ -40,15 +40,16 @@ export class RegisterComponent {
     
     // do post
     this.userService.createUser(this.registerForm.value)
-      .subscribe({
-        next:  resp => {
-          this.router.navigateByUrl('/dashboard')
-        },
-        error: err => {
-          // console.log(err.status)
-          Swal.fire('Error', 'there was an error', 'error')
+      .subscribe(
+        res => {
+          if( res ){
+            this.router.navigateByUrl( '/dashboard')
+          } else {
+            Swal.fire('Error', 'there was an error', 'error')
+
+          }
         }
-      });
+    );
   }
 
   invalidField( field: string ): boolean {

@@ -41,14 +41,6 @@ export class UserService {
     return this.user.uid || '';
   }
 
-  get headers(){
-    return {
-      headers: {
-      'x-token': this.token
-      }
-    }
-  }
-
   googleInit(){
     return new Promise( resolve => {
       gapi.load('auth2', ()=>{
@@ -68,11 +60,7 @@ export class UserService {
   }
 
   ValidToken(): Observable<boolean>{
-    return this.http.get(`${this._baseUrl}/auth/renew`, {
-      headers: {
-        'x-token': this.token
-      }
-    })
+    return this.http.get(`${this._baseUrl}/auth/renew`)
       .pipe(
         map( (resp: any) => {
           const { name, email, image, google, role, uid } = resp.body.user;
@@ -99,7 +87,7 @@ export class UserService {
   }
 
   updateProfile( data: { email: string, name: string }){
-    return this.http.put( `${ this._baseUrl }/users/${this.uid}`, data, this.headers )      
+    return this.http.put( `${ this._baseUrl }/users/${this.uid}`, data )      
   }
 
   login( formData: LoginForm ){
@@ -139,7 +127,7 @@ export class UserService {
   }
 
   getUsers(since:number = 0){
-    return this.http.get<LoadUsers>( `${this._baseUrl}/users?since=${ since }`, this.headers)
+    return this.http.get<LoadUsers>( `${this._baseUrl}/users?since=${ since }`)
             .pipe(
               delay( 600 ),
               map( resp => {
@@ -156,10 +144,10 @@ export class UserService {
   }
 
   destroyUser( user: User ){
-    return this.http.delete( `${ this._baseUrl }/users/${ user.uid }`, this.headers );
+    return this.http.delete( `${ this._baseUrl }/users/${ user.uid }` );
   }
 
   saveProfile( user: User ){
-    return this.http.put( `${ this._baseUrl }/users/${user.uid}`, user, this.headers )      
+    return this.http.put( `${ this._baseUrl }/users/${user.uid}`, user )      
   }
 }

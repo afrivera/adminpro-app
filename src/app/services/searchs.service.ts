@@ -19,14 +19,6 @@ export class SearchsService {
     return localStorage.getItem('x-token') || '';
   }
 
-  get headers(){
-    return {
-      headers: {
-      'x-token': this.token
-      }
-    }
-  }
-
   transformUsers( results: any[]) :User[]{
     
     return results.map( 
@@ -36,11 +28,11 @@ export class SearchsService {
 
   globalSearch( term: string ){
     const url = `${ this._baseUrl }/all/search/${ term }`
-    return this.http.get( url, this.headers );
+    return this.http.get( url );
   }
 
   search( type: 'users' | 'doctors' | 'hospitals', term: string){
-    return this.http.get<any []>( `${this._baseUrl}/all/collection/${ type }/${ term }`, this.headers)
+    return this.http.get<any []>( `${this._baseUrl}/all/collection/${ type }/${ term }`)
             .pipe(
               map( (resp: any ) =>{
                 switch (type) {

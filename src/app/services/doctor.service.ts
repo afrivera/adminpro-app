@@ -18,18 +18,10 @@ export class DoctorService {
   get token( ){
     return localStorage.getItem('x-token') || '';
   }
-  
-  get headers(){
-    return {
-      headers: {
-        'x-token': this.token
-      }
-    }
-  }
 
   loadDoctors(): Observable<Doctor[]>{
     const url = `${ base_url }/doctors`;
-    return this.http.get( url, this.headers )
+    return this.http.get( url,)
       .pipe(
         map((res: any) => res.body)
       )
@@ -37,7 +29,7 @@ export class DoctorService {
 
   getDoctorById( id: string ):Observable<Doctor>{
     const url = `${ base_url }/doctors/${ id }`;
-    return this.http.get( url, this.headers)
+    return this.http.get( url)
       .pipe(
         map( (res: any) => res.body)
       )
@@ -45,16 +37,16 @@ export class DoctorService {
 
   createDoctor( doctor: Doctor){
     const url = `${ base_url }/doctors`;
-    return this.http.post( url, doctor, this.headers);
+    return this.http.post( url, doctor);
   }
 
   updateDoctor( doctor: Doctor ){
     const url = `${ base_url }/doctors/${ doctor._id }`;
-    return this.http.put( url, doctor, this.headers );
+    return this.http.put( url, doctor );
   }
 
   destroyDoctor( doctor: Doctor ){
     const url = `${ base_url}/doctors/${ doctor._id}`;
-    return this.http.delete(url, this.headers);
+    return this.http.delete(url);
   }
 }
