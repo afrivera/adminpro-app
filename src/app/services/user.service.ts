@@ -101,7 +101,8 @@ export class UserService {
                 tap( (resp: any) => {
                   this.saveLS( resp.body.token, resp.body.menu);
                   return true
-                })
+                }),
+                catchError( err => of( false ))
               )     
   }
 

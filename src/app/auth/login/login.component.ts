@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import Swal from 'sweetalert2';
 
 declare const gapi:any;
 @Component({
@@ -40,7 +41,13 @@ export class LoginComponent implements OnInit {
   login(){
 
     this.userService.login( this.loginForm.value )
-      .subscribe( resp => this.router.navigateByUrl('/dashboard'))
+      .subscribe( resp => {
+        if( resp){
+          this.router.navigateByUrl('/dashboard');
+        } else {
+          Swal.fire('Error', 'Invalid Credentials', 'error')
+        }
+      })
     // console.log(this.loginForm.value)
     // this.router.navigateByUrl('/');
   }
